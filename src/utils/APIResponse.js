@@ -26,8 +26,10 @@ class ApiResponse {
 
       this.response.json(response);
     } catch (e) {
+      console.log(e);
       const error = await reject(e);
       handler(error, this.response);
+      
     }
   }
 

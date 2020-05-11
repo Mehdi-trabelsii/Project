@@ -10,8 +10,8 @@ export const register = {
       .required()
       .min(6)
       .max(128),
-    id_machine: Joi.string(),
-    name: Joi.string().required(),
+    firstName: Joi.string().required(),
+    lastName:Joi.string().required(),
   },
 };
 
