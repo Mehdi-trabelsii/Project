@@ -1,7 +1,8 @@
-import mongoose, { Model, Document } from 'mongoose';
+import mongoose from 'mongoose';
+import { list, get } from '../utils/helpers';
 const promotionSchema = new mongoose.Schema(
     {
-        datedebut:{
+        datestart:{
             type:Date,
             required:true,
         },
@@ -16,5 +17,23 @@ const promotionSchema = new mongoose.Schema(
 
     }
 );
+promotionSchema.method({
+    transform() {
+      const transformed= {};
+      const fields = ['_id', 'datestart', 'datefin', 'reduction'];
+  
+      fields.forEach((field) => {
+        (transformed )[field] = this[field];
+      });
+  
+      return transformed;
+    },
+    
+})
+promotionSchema.statics={
+    get,
+    list,
+}
+
 const promotion = mongoose.model('Promotion', promotionSchema);
 export default promotion;
