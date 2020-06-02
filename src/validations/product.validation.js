@@ -9,7 +9,7 @@ export const listProducts = {
         .max(100),
       label: Joi.string(),
       price: Joi.number(),
-      images: Joi.string(),
+      images: Joi.array(),
       promotion : Joi.string(),
     },
   };
@@ -45,6 +45,7 @@ export const updateProduct = {
         .max(400),
         images:Joi.array().required(),
         marque:Joi.string().required(),
-        promotion:Joi.string().required()
+        promotion:Joi.string().required(),
+        category : Joi.string().required()
     },
   };

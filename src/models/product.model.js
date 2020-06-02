@@ -2,6 +2,7 @@ import mongoose, { Model, Document } from 'mongoose';
 import APIError from '../utils/APIError';
 import { list, get } from '../utils/helpers';
 import {isNil,omitBy} from 'lodash';
+import category from './category.model';
 const productSchema = new mongoose.Schema(
 
     {
@@ -49,10 +50,10 @@ const productSchema = new mongoose.Schema(
         //     type:mongoose.Schema.Types.ObjectId,
         //     ref:'Model'
         // },
-        // categorie:{
-        //     type:mongoose.Schema.Types.ObjectId,
-        //     ref:'Category'
-        // },
+        category:{
+            type:mongoose.Schema.Types.ObjectId,
+            ref:'Category'
+        },
     },
 
 
@@ -61,7 +62,7 @@ const productSchema = new mongoose.Schema(
 productSchema.method({
     transform() {
       const transformed= {};
-      const fields = ['_id', 'label', 'price', 'quantity', 'credit', 'description', 'images','marque','promotion'];
+      const fields = ['_id', 'label', 'price', 'quantity', 'credit', 'description', 'images','marque','category','promotion'];
   
       fields.forEach((field) => {
         (transformed )[field] = this[field];
