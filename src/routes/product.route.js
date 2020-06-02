@@ -5,7 +5,7 @@ import { listProducts,createProduct,updateProduct } from '../validations/product
 
 const router = express.Router();
 router.route('/listprod').get(validate(listProducts), controller.list);
-router.route('/create').post(validate(createProduct), controller.add);
+router.route('/createprod').post(validate(createProduct), controller.add);
 router.route('/:id').patch(validate(updateProduct),controller.update);
 
 export default router;
