@@ -50,4 +50,5 @@ const storage = multer.diskStorage({
   },
 });
 const uploadIcon = multer({ storage });
+
 export default uploadIcon;

@@ -10,10 +10,10 @@ export const listProducts = {
       label: Joi.string(),
       price: Joi.number(),
       images: Joi.string(),
+      promotion : Joi.string(),
     },
   };
 
-  // PATCH /v1/users/:userId
 export const updateProduct = {
     body: {
       label: Joi.string().
