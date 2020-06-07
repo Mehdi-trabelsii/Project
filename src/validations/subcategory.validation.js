@@ -1,7 +1,7 @@
 import Joi from '@hapi/joi';
 
 // POST /v1/categories/createcategory
-export const createcategory = {
+export const createsubcategory = {
     body: {
       label: Joi.string()
         .required()
@@ -14,7 +14,7 @@ export const createcategory = {
   };
 //GET /v1/categories/listcategories
 
-export const listcategories ={
+export const listsubcategories ={
     body: {
         page: Joi.number().min(1),
         perPage: Joi.number()

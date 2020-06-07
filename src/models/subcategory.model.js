@@ -11,9 +11,8 @@ const subcategorySchema =new mongoose.Schema(
         unique:true,
         },
         characteristics:[{
-            type:String,
-            maxlength:128,
-            trim:true
+            type:mongoose.Schema.Types.ObjectId,
+            ref:'Characteristic'
         }],
         image:{
             type:String,
@@ -36,7 +35,7 @@ subcategorySchema.method({
     },
     
 })
-categorySchema.statics={
+subcategorySchema.statics={
     checkDuplicateLabel(error) {
         if (error.name === 'MongoError' && error.code === 11000) {
           return new APIError({
