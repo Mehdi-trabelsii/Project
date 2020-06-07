@@ -41,11 +41,9 @@ export const updateProduct = {
         quantity: Joi.number().required(),
         credit:Joi.number().required(),
         description:Joi.string().required()
-        .min(28)
         .max(400),
         images:Joi.array().required(),
         marque:Joi.string().required(),
-        promotion:Joi.string().required(),
         category : Joi.string().required()
     },
   };

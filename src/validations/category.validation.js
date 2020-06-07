@@ -21,6 +21,7 @@ export const listcategories ={
           .max(100),
         label: Joi.string(),
         image: Joi.string(),
+        subcategories: Joi.array()
       },
 }
 

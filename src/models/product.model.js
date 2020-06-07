@@ -30,7 +30,6 @@ const productSchema = new mongoose.Schema(
             type:String,
             required:true,
             maxlength:400,
-            minlength:28,
         },
         images:[{
             type:String,
@@ -44,7 +43,6 @@ const productSchema = new mongoose.Schema(
         promotion:{
             type:mongoose.Schema.Types.ObjectId, 
             ref:'Promotion',
-            default : null
         },
         // model:{
         //     type:mongoose.Schema.Types.ObjectId,

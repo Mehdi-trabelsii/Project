@@ -7,7 +7,8 @@ import httpStatus from 'http-status';
 
 export function get(req, res) {
   return new ApiResponse(res).success(() => {
-    return req.locals.product.transform();
+    const  product  = Product.findById(req.params.id);
+    return product;
   });
 }
 
@@ -34,9 +35,9 @@ export function list(req, res, next) {
   }
 
   export function remove(req, res, next) {
-    const { product } = req.locals;
+    const  product  = Product.findById(req.params.id);
     product
-      .remove()
+      .deleteOne()
       .then(() => res.status(httpStatus.NO_CONTENT).end())
       .catch(e => next(e));
   }
@@ -47,17 +48,8 @@ export function list(req, res, next) {
         
         const updatedproduct = await Product.findByIdAndUpdate(req.params.id,omit(req.body),{new:true});
 
-        return (await updatedproduct.populate("promotion")).transform();
+        return (await updatedproduct.populate("category","promotion")).transform();
       },
       (error) => next(Product.checkDuplicateLabel(error)),
     );
-  }
-  export async function load (req, res, next, id)  {
-    try {
-      const product = await Product.findById(id);
-      req.locals = { product };
-      return next();
-    } catch (error) {
-      return errorHandler(error, req, res);
     }
-  };
