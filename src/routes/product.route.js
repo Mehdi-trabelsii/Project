@@ -5,7 +5,6 @@ import { listProducts,createProduct,updateProduct } from '../validations/product
 
 const router = express.Router();
 router.route('/list').get(validate(listProducts), controller.list);
-router.route('/list/withpromo').get(validate(listProducts),controller.listwithpromo);
 router.route('/list/:id').get(controller.get);
 router.route('/create').post(validate(createProduct), controller.add);
 router.route('update/:id').patch(validate(updateProduct),controller.update)
