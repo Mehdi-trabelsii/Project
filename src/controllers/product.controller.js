@@ -22,11 +22,11 @@ export function add(req,res) {
     }
     return new ApiResponse(res).create( addproduct, erroraddingproduct);
 }
-
 export function list(req, res, next) {
     return new ApiResponse(res).success(
       async () => {
         const products = await Product.list(req.query);
+        console.log(products);
         const transformedProducts = products.map(product => product.transform());
         return transformedProducts;
       },
@@ -52,4 +52,19 @@ export function list(req, res, next) {
       },
       (error) => next(Product.checkDuplicateLabel(error)),
     );
+    }
+    export function listwithpromo(req, res, next) {
+      return new ApiResponse(res).success(
+        async () => {
+          const products = await Product.list(req.query);
+          console.log(products);
+          const transformedProducts = products.map(product => product.transform());
+          for (let i= 0; i < transformedProducts.length ;i++) {
+            if(transformedProducts[i].promotion!=null){
+              return transformedProducts[i];
+            }
+          }
+        },
+        (error) => next(error),
+      );
     }
