@@ -35,4 +35,5 @@ export function remove(req, res, next) {
     .deleteOne()
     .then(() => res.status(httpStatus.NO_CONTENT).end())
     .catch(e => next(e));
+    console.log(done);
 }
