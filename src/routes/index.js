@@ -6,6 +6,7 @@ import productRoutes from './product.route'
 import promotionRoutes from'./promotion.route'
 import categoryRoutes from './category.route'
 import subcategoryRoutes from './subcategory.route';
+import reviewRoutes from'./review.route';
 import uploadIcon from '../utils/helpers';
 import path from 'path';
 import {uploadcontroller} from '../controllers/upload.controller';
@@ -19,6 +20,7 @@ const router = express.Router();
 router.get('/status', (req, res) => res.send('OK'));
 router.use('/promos',promotionRoutes);
 router.use('/products',productRoutes);
+router.use('/reviews',reviewRoutes);
 router.use('/categories',categoryRoutes);
 router.use('/subcategories',subcategoryRoutes);
 router.use('/users', userRoutes);

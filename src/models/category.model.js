@@ -10,15 +10,15 @@ const categorySchema =new mongoose.Schema(
         trim:true,
         unique:true,
         },
-        characteristics:[{
-            type:String,
-            maxlength:128,
-            trim:true
-        }],
         image:{
             type:String,
             required:true,
             trim:true
+        },
+        icon:{
+          type:String,
+          required:true,
+          trim:true,
         }
 
     }
@@ -26,7 +26,7 @@ const categorySchema =new mongoose.Schema(
 categorySchema.method({
     transform() {
       const transformed= {};
-      const fields = ['_id', 'label', 'characteristics','image'];
+      const fields = ['_id', 'label', 'icon','image'];
   
       fields.forEach((field) => {
         (transformed )[field] = this[field];

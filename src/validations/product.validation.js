@@ -44,6 +44,7 @@ export const updateProduct = {
         .max(400),
         images:Joi.array().required(),
         marque:Joi.string().required(),
-        category : Joi.string().required()
+        category : Joi.string().required(),
+        promotion: Joi.string().required()
     },
   };

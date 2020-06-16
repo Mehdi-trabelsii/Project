@@ -15,7 +15,7 @@ router.param('userId', load(User, 'user'));
 router
   .route('/')
 
-  .get(authorize(LOGGED_USER), validate(listUsers), controller.list)
+  .get(authorize('admin'), validate(listUsers), controller.list)
 
   .post(authorize('admin'), validate(createUser), controller.create);
 

@@ -6,10 +6,8 @@ export const createcategory = {
       label: Joi.string()
         .required()
         .max(128),
-        characteristics: Joi.array()
-        .required(),
       image: Joi.string().required(),
-      subcategories: Joi.array()
+      icon: Joi.string().required()
     },
   };
 //GET /v1/categories/listcategories
@@ -22,7 +20,6 @@ export const listcategories ={
           .max(100),
         label: Joi.string(),
         image: Joi.string(),
-        subcategories: Joi.array()
       },
 }
 

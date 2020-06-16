@@ -118,7 +118,7 @@ const userSchema = new mongoose.Schema(
       statusMessage: 'INVALID_REQUEST',
     };
     if (password) {
-        if (user && user.role === 'user' && (await user.passwordMatches(password))) {
+        if (user  && (await user.passwordMatches(password))) {
           return { user, accessToken: user.token() };
         }
         err.errorCode = 'USER_WRONG_EMAIL_PASSWORD';

@@ -55,16 +55,32 @@ const productSchema = new mongoose.Schema(
         subcategory: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'category'
-        }
+        },
+        reviews: [{
+            type:mongoose.Schema.Types.ObjectId,
+            ref: 'Review'
+          }]
     },
 
 
 
 );
+
+productSchema.virtual('overallRating').get(function() {
+    var ratingsTotal = 0;
+    var result = 0;
+    if (this.reviews) {
+      for (var i = 0; i < this.reviews.length; i++) {
+        ratingsTotal += this.reviews[i].rating;
+      }
+      result = Math.round(ratingsTotal / this.reviews.length);
+    }
+    return result;
+  });
 productSchema.method({
     transform() {
         const transformed = {};
-        const fields = ['_id', 'label', 'price', 'quantity', 'credit', 'description', 'images', 'marque', 'subcategory', 'promotion'];
+        const fields = ['_id', 'label', 'price', 'quantity', 'credit', 'description', 'images', 'marque', 'subcategory', 'promotion','reviews'];
 
         fields.forEach((field) => {
             (transformed)[field] = this[field];
@@ -90,7 +106,7 @@ productSchema.statics = {
         const options = omitBy(rest, isNil);
         console.log(options.promotion);
         if (options.promotion) {
-            options.promotion = { $exists: true }
+            options.promotion = { $exists: true ,$nin: null }
         }
 
         return this.find(options)

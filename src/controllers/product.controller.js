@@ -53,13 +53,3 @@ export function list(req, res, next) {
       (error) => next(Product.checkDuplicateLabel(error)),
     );
     }
-    export function listwithpromo(req, res, next) {
-      return new ApiResponse(res).success(
-        async () => {
-          const products = await Product.list(req.query);
-          const productswithpromo = Product.find({promotion:{$exist: true}})
-          return productswithpromo ;
-        },
-        (error) => next(error),
-      );
-    }

@@ -30,3 +30,10 @@ export function list(req, res, next) {
       (error) => next(error),
     );
   }
+  export function remove(req, res, next) {
+    const  category  = Category.findById(req.params.id);
+    category
+      .deleteOne()
+      .then(() => res.status(httpStatus.NO_CONTENT).end())
+      .catch(e => next(e));
+  }
