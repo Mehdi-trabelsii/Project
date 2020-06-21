@@ -50,11 +50,12 @@ const productSchema = new mongoose.Schema(
         // },
         category: {
             type: mongoose.Schema.Types.ObjectId,
+            ref:'Category',
             required: true,
         },
         subcategory: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'category'
+            ref: 'Subcategory'
         },
         reviews: [{
             type:mongoose.Schema.Types.ObjectId,
@@ -80,7 +81,7 @@ productSchema.virtual('overallRating').get(function() {
 productSchema.method({
     transform() {
         const transformed = {};
-        const fields = ['_id', 'label', 'price', 'quantity', 'credit', 'description', 'images', 'marque', 'subcategory', 'promotion','reviews'];
+        const fields = ['_id', 'label', 'price', 'quantity', 'credit', 'description', 'images', 'marque', 'subcategory', 'promotion','category','reviews'];
 
         fields.forEach((field) => {
             (transformed)[field] = this[field];

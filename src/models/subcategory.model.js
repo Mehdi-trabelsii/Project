@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import { list, get } from '../utils/helpers'
+import category from './category.model';
 const subcategorySchema =new mongoose.Schema(
     {
         label:
@@ -18,6 +19,10 @@ const subcategorySchema =new mongoose.Schema(
             type:String,
             required:true,
             trim:true
+        },
+        category:{
+          type:mongoose.Schema.Types.ObjectId,
+          ref:'Category'
         }
 
     }
@@ -25,7 +30,7 @@ const subcategorySchema =new mongoose.Schema(
 subcategorySchema.method({
     transform() {
       const transformed= {};
-      const fields = ['_id', 'label', 'characteristics','image'];
+      const fields = ['_id', 'label', 'characteristics','image','category'];
   
       fields.forEach((field) => {
         (transformed )[field] = this[field];

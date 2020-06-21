@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 import { list, get } from '../utils/helpers'
-const panelschema = new mongoose.Schema(
+import { number } from '@hapi/joi';
+const cartSchema = new mongoose.Schema(
     {
         user: {
             type:mongoose.Schema.Types.ObjectId,
@@ -8,12 +9,9 @@ const panelschema = new mongoose.Schema(
         },
         products:[{
             type:mongoose.Schema.Types.ObjectId,
-            ref:'Product'
+            ref:'Product',
+            // quantity:Number,
         }],
-        quantityprod:{
-            type:Number,
-            default:null,
-        },
         totalquantity:{
             type:Number,
             default:null,
@@ -24,10 +22,17 @@ const panelschema = new mongoose.Schema(
         }
     }
 );
-panelSchema.method({
+cartSchema.pre('save', function (next) {
+for (let i = 0; i < this.products.length; i++) {
+    this.totalquantity=this.totalquantity+1
+}
+next();
+});
+
+cartSchema.method({
     transform() {
         const transformed = {};
-        const fields = ['_id', 'user', 'products', 'quantityprod', 'totalquantity', 'totalprice'];
+        const fields = ['_id', 'user', 'products', 'totalquantity', 'totalprice'];
 
         fields.forEach((field) => {
             (transformed)[field] = this[field];
@@ -37,6 +42,6 @@ panelSchema.method({
     },
 
 })
-const panel = mongoose.model('Panel', panelSchema);
-export default panel;
+const cart = mongoose.model('Cart', cartSchema);
+export default cart;
 
