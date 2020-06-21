@@ -22,12 +22,12 @@ const cartSchema = new mongoose.Schema(
         }
     }
 );
-cartSchema.pre('save', function (next) {
-for (let i = 0; i < this.products.length; i++) {
-    this.totalquantity=this.totalquantity+1
-}
-next();
-});
+// cartSchema.pre('save', function (next) {
+// for (let i = 0; i < this.products.length; i++) {
+// //     this.totalquantity=this.totalquantity+1
+// // }
+// next();
+// });
 
 cartSchema.method({
     transform() {

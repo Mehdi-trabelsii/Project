@@ -17,9 +17,10 @@ export async function add(req, res, next) {
     for (var i = 0; i < product.reviews.length; i++) {
         if (product.reviews[i].user.toJSON() === req.user._id.toJSON()) {
             res.status = 401;
-            return res.json({status:'INVALID_REQUEST',errorCode:'you alredy reviewed this product'});
+            return res.json({status:'INVALID_REQUEST',errorCode:'you already reviewed this product'});
         }
     }
+    
     var review = new Review(req.body);
     review.postedOn = Date.now();
 

@@ -9,7 +9,8 @@ export const createsubcategory = {
         characteristics: Joi.array()
         .required(),
       image: Joi.string().required(),
-      subcategories: Joi.array()
+      icon: Joi.string().required(),
+      category: Joi.string().required(),
     },
   };
 //GET /v1/categories/listcategories
@@ -22,7 +23,8 @@ export const listsubcategories ={
           .max(100),
         label: Joi.string(),
         image: Joi.string(),
-        subcategories: Joi.array()
+        icon: Joi.string(),
+        category: Joi.string(),
       },
 }
 
