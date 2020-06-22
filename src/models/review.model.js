@@ -13,8 +13,12 @@ const reviewSchema = new mongoose.Schema({
         min: [1],
         max: [5]
     },
-    review: String
-}, 
+    review: String,
+    replies: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Reply'
+    }]
+},
 );
 reviewSchema.pre('save', function (next) {
     Math.round(this.rating);
@@ -23,7 +27,7 @@ reviewSchema.pre('save', function (next) {
 reviewSchema.method({
     transform() {
         const transformed = {};
-        const fields = ['_id','postedon','rating','review','user'];
+        const fields = ['_id', 'postedon', 'rating', 'review', 'user','replies'];
 
         fields.forEach((field) => {
             (transformed)[field] = this[field];
@@ -33,5 +37,9 @@ reviewSchema.method({
     },
 
 })
+reviewSchema.statics={
+    get,
+    list,
+  }
 var Review = mongoose.model('Review', reviewSchema);
 export default Review;

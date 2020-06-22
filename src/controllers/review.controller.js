@@ -2,7 +2,25 @@ import Review from '../models/review.model';
 import ApiResponse from '../utils/APIResponse';
 import httpStatus from 'http-status';
 import Product from '../models/product.model';
-import product from '../models/product.model';
+
+
+export function get(req, res) {
+    console.log("this is working");
+    return new ApiResponse(res).success(() => {
+      const  review  = Review.findById(req.params.id);
+      return review;
+    });
+  }
+  export function list(req, res, next) {
+    return new ApiResponse(res).success(
+      async () => {
+        const reviews = await Review.list(req.query);
+        const transformedReviews = reviews.map(reviews => reviews.transform());
+        return transformedReviews;
+      },
+      (error) => next(error),
+    );
+  }
 
 export async function add(req, res, next) {
     
@@ -31,3 +49,7 @@ export async function add(req, res, next) {
     res.status(201);
     res.json(review);
 }
+
+
+
+

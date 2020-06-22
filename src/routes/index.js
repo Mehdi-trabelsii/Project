@@ -7,6 +7,7 @@ import promotionRoutes from'./promotion.route'
 import categoryRoutes from './category.route'
 import subcategoryRoutes from './subcategory.route';
 import reviewRoutes from'./review.route';
+import replyRoutes from'./reply.route';
 import cartRoutes from'./cart.route';
 import uploadIcon from '../utils/helpers';
 import path from 'path';
@@ -22,6 +23,7 @@ router.get('/status', (req, res) => res.send('OK'));
 router.use('/promos',promotionRoutes);
 router.use('/products',productRoutes);
 router.use('/reviews',reviewRoutes);
+router.use('/replies',replyRoutes);
 router.use('/cart',cartRoutes);
 router.use('/categories',categoryRoutes);
 router.use('/subcategories',subcategoryRoutes);

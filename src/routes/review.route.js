@@ -7,5 +7,7 @@ const router = express.Router();
 
 router.route('/product/:id').post(authorize(LOGGED_USER), validate(createreview),controller.add);
 
+router.route('/list/:id').get(controller.get);
+
 export default router;
 

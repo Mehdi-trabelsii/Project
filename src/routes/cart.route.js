@@ -5,6 +5,6 @@ import validate from '../middlewares/validation';
 // import { createreview } from '../validations/review.validation';
 const router = express.Router();
 
-router.route('/:cartid/product/:id').post(authorize(LOGGED_USER),controller.add);
+router.route('/product/:id').post(authorize(LOGGED_USER),controller.add);
 
 export default router;

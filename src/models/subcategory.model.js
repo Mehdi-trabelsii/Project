@@ -20,6 +20,11 @@ const subcategorySchema =new mongoose.Schema(
             required:true,
             trim:true
         },
+        icon:{
+          type:String,
+          required:true,
+          trim:true
+        },
         category:{
           type:mongoose.Schema.Types.ObjectId,
           ref:'Category'
@@ -30,7 +35,7 @@ const subcategorySchema =new mongoose.Schema(
 subcategorySchema.method({
     transform() {
       const transformed= {};
-      const fields = ['_id', 'label', 'characteristics','image','category'];
+      const fields = ['_id', 'label', 'characteristics','image','icon','category'];
   
       fields.forEach((field) => {
         (transformed )[field] = this[field];
