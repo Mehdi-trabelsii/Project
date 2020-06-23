@@ -119,7 +119,4 @@ productSchema.statics = {
     }
 }
 const product = mongoose.model('Product', productSchema);
-
-
-
 export default product;

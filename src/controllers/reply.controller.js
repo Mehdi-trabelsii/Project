@@ -15,9 +15,9 @@ export async function add(req, res, next) {
     reply.postedOn = Date.now();
 
     reply.user = req.locals.user._id;
-    review.replies.push(reply);
-    reply.save();
+    await reply.save();
     await review.update({ $push: {replies:reply.id} })
     res.status(201);
     res.json(reply);
 }
+

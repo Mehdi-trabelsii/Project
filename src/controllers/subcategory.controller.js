@@ -1,4 +1,4 @@
-import Category from '../models/subcategory.model';
+import Subcategory from '../models/subcategory.model';
 import ApiResponse from '../utils/APIResponse';
 import httpStatus from 'http-status';
 

@@ -1,32 +1,25 @@
 import mongoose from 'mongoose';
-import { list, get } from '../utils/helpers'
-import { number } from '@hapi/joi';
+
 const cartSchema = new mongoose.Schema(
     {
         user: {
-            type:mongoose.Schema.Types.ObjectId,
-            ref:'User'
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User'
         },
-        products:[{
-            type:mongoose.Schema.Types.ObjectId,
-            ref:'Product',
-            // quantity:Number,
+        products: [{
+            product: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'Product',
+            },
+            quantity: Number,
         }],
-        totalquantity:{
-            type:Number,
-            default:null,
-        },
-        totalprice:{
-            type:Number,
-            default:null,
-        }
     },
 
 );
 cartSchema.method({
     transform() {
         const transformed = {};
-        const fields = ['_id', 'user', 'products', 'totalquantity', 'totalprice'];
+        const fields = ['_id', 'user', 'products'];
 
         fields.forEach((field) => {
             (transformed)[field] = this[field];

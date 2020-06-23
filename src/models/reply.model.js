@@ -1,6 +1,5 @@
 import mongoose from 'mongoose';
 import { list, get } from '../utils/helpers'
-import { number } from '@hapi/joi';
 
 const replySchema = new mongoose.Schema({
     user: {
@@ -9,13 +8,13 @@ const replySchema = new mongoose.Schema({
     },
     postedOn: Date,
     reply: String,
-    likes:Number
-}, 
+    likes: Number
+},
 );
 replySchema.method({
     transform() {
         const transformed = {};
-        const fields = ['_id','postedon','reply','user'];
+        const fields = ['_id', 'postedon', 'reply', 'user'];
 
         fields.forEach((field) => {
             (transformed)[field] = this[field];
@@ -25,9 +24,9 @@ replySchema.method({
     },
 
 }),
-replySchema.statics={
-      get,
-      list,
+    replySchema.statics = {
+        get,
+        list,
     }
 var Reply = mongoose.model('Reply', replySchema);
 export default Reply;
